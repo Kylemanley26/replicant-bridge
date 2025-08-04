@@ -1,4 +1,59 @@
-# Blade Runner - Android Security Scanner
+## Example Workflow
+
+```bash
+# 1. Run the master script
+./blade_runner_master.sh
+
+# 2. Select option 4 (Run Everything)
+# This will:
+#   - Run full security audit
+#   - Analyze patterns
+#   - Auto-remediate issues
+#   - Generate reports
+
+# 3. Review the HTML report
+# Auto-opens in browser
+
+# 4. Check remediation log
+cat android_security_audit_*/REMEDIATION_REPORT.txt
+```## Auto-Remediation Actions
+
+The remediation system automatically:
+
+### Memory Optimization
+- Force stops high-memory apps (Instagram, Facebook, etc.)
+- Clears system caches
+- Optimizes app standby buckets
+
+### Privacy Enhancement
+- Restricts background location for non-essential apps
+- Switches location mode to battery saving
+- Disables always-on WiFi/mobile scanning
+
+### Battery Optimization
+- Sets social media apps to "restricted" standby
+- Limits background activity for battery hogs
+- Optimizes network scanning settings
+
+### Security Hardening
+- Identifies apps with dangerous permission combinations
+- Creates custom rules based on findings
+- Provides manual review recommendations
+
+## Security Scoring
+
+Blade Runner calculates a security score (0-100):
+- **90-100**: ★★★★★ EXCELLENT
+- **80-89**: ★★★★☆ GOOD
+- **70-79**: ★★★☆☆ FAIR
+- **60-69**: ★★☆☆☆ POOR
+- **Below 60**: ★☆☆☆☆ CRITICAL
+
+Deductions for:
+- Knox warranty tripped (-20)
+- SELinux not enforcing (-15)
+- Sideloaded apps (-5 each)
+- Excessive background apps (-5)# Blade Runner - Android Security Scanner & Auto-Remediation Suite
 
 <p align="center">
   <em>"I've seen things you people wouldn't believe... Suspicious apps with SMS permissions off the shoulder of Samsung..."</em>
@@ -6,7 +61,44 @@
 
 ## Overview
 
-**Blade Runner** is a comprehensive Android security audit tool that hunts down rogue apps and suspicious permissions on Android devices. Like its namesake hunting replicants, it identifies apps that aren't what they appear to be.
+**Blade Runner** is a comprehensive Android security audit and auto-remediation tool that hunts down rogue apps and automatically fixes security issues. Like its namesake hunting replicants, it identifies apps that aren't what they appear to be and neutralizes threats.
+
+## 🚀 New: Auto-Remediation Features
+
+### Master Control Script
+```bash
+./blade_runner_master.sh
+```
+
+Provides a menu-driven interface for:
+- Full security audits
+- Pattern analysis
+- Automatic remediation
+- Quick security checks
+- HTML report generation
+
+### Auto-Remediation
+```bash
+./blade_runner_remediate.sh <audit_directory>
+```
+
+Automatically fixes:
+- High memory usage (kills resource hogs, clears caches)
+- Excessive background location permissions
+- Battery-draining location settings
+- App standby optimization
+- Network scanning settings
+
+### Pattern Analysis
+```bash
+./blade_runner_analyze.sh <audit_directory>
+```
+
+Analyzes:
+- SMS permission patterns
+- Background activity patterns
+- Creates custom remediation rules
+- Calculates security score (0-100)
 
 ## Features
 
@@ -40,24 +132,40 @@ chmod +x security_cleanup.sh
 
 ## Usage
 
-### Main Security Audit
+### Quick Start - Master Script (Recommended)
+```bash
+# Make all scripts executable
+chmod +x blade_runner_*.sh
+
+# Run the master control script
+./blade_runner_master.sh
+```
+
+### Individual Components
+
+#### Main Security Audit
 ```bash
 # Run the complete security audit
 sudo ./bladerunner.sh
 ```
 
-Output will be saved to `android_security_audit_YYYYMMDD_HHMMSS/`
-
-### Quick Suspicious App Scan
+#### Auto-Remediation
 ```bash
-# Fast scan for suspicious apps only
-./suspicious_app_scanner.sh
+# Automatically fix issues found in audit
+./blade_runner_remediate.sh android_security_audit_YYYYMMDD_HHMMSS
 ```
 
-### Security Cleanup
+#### Pattern Analysis
 ```bash
-# Interactive cleanup tool
-./security_cleanup.sh
+# Analyze patterns and create custom rules
+./blade_runner_analyze.sh android_security_audit_YYYYMMDD_HHMMSS
+```
+
+#### Quick Scan
+```bash
+# Run from master script menu option 5
+./blade_runner_master.sh
+# Select option 5
 ```
 
 ## What It Detects
@@ -87,13 +195,21 @@ Output will be saved to `android_security_audit_YYYYMMDD_HHMMSS/`
 
 Each audit creates a timestamped directory containing:
 
+### Core Reports
 - `FINAL_REPORT.txt` - Executive summary
+- `REMEDIATION_REPORT.txt` - Auto-fix summary (after remediation)
+- `COMPREHENSIVE_SECURITY_REPORT.html` - Visual HTML report
+- `analysis/security_score.txt` - Security rating (0-100)
+- `analysis/custom_remediation_rules.sh` - Generated fix scripts
+
+### Detailed Scans
 - `device_info.txt` - Device identification
 - `sms_interceptors.txt` - Apps with SMS permissions
 - `overlay_apps.txt` - Potential overlay attackers
+- `background_location_apps.txt` - Battery drainers
 - `microsoft_analysis.txt` - Windows Phone app analysis
 - `network_connections.txt` - Active connections
-- And 20+ other detailed reports...
+- And 30+ other detailed reports...
 
 ## Common Findings
 
