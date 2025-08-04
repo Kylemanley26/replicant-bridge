@@ -1,0 +1,71 @@
+# Android Security Audit - Blade Runner
+# .gitignore
+
+# Audit output directories
+android_security_audit_*/
+audit_*/
+*_audit_*/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Log files
+*.log
+*.txt
+!README.txt
+!*_instructions.txt
+!*_playbook.md
+
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# IDE and editor files
+.idea/
+.vscode/
+*.sublime-*
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Script output files
+output/
+results/
+reports/
+
+# ADB specific
+*.ab
+*.apk
+
+# Keep important scripts and documentation
+!bladerunner.sh
+!android_security_audit*.sh
+!suspicious_app_scanner.sh
+!security_cleanup.sh
+!init_git_repo.sh
+!*.md
+
+# Sensitive data
+credentials.txt
+passwords.txt
+keys.txt
+tokens.txt
+
+# Compressed files (usually contain results)
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+
+# Cache directories
+.cache/
+__pycache__/
